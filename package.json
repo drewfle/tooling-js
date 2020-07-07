@@ -1,0 +1,12 @@
+{
+  "name": "root",
+  "scripts": {
+    "postinstall": "lerna bootstrap --hoist",
+    "clean": "rimraf ./**/node_modules"
+  },
+  "devDependencies": {
+    "rimraf": "3.0.2",
+    "lerna": "3.22.1",
+    "prettier": "2.0.5"
+  }
+}
