@@ -23,11 +23,16 @@ export function calcOutputOptions(
   localOptons: RollupOptions | undefined
 ) {
   const outputOptionsDefault = calcOutputOptionsDefault(cliOptions);
-  let calculatedOptions = mergeWithLocalOutputConfig(
+  let calculatedOptions = configureOutputOptions(
     outputOptionsDefault,
+    cliOptions
+  );
+  // Merge local at last to override existing config
+  calculatedOptions = mergeWithLocalOutputConfig(
+    calculatedOptions,
     localOptons
   );
-  calculatedOptions = configureOutputOptions(calculatedOptions, cliOptions);
+
   return calculatedOptions;
 }
 
@@ -58,9 +63,11 @@ function configureOutputOptions(
         allowAllFormats: true,
         ...babelConfigDefault,
       }),
-      terser(),
     ];
     configuredOptions.sourcemap = false;
+  }
+  if (cliOptions.terser) {
+    configuredOptions.plugins!.push(terser());
   }
   return configuredOptions;
 }

@@ -1,8 +1,3 @@
-import { nodeResolve } from "@rollup/plugin-node-resolve";
-import typescript from "rollup-plugin-typescript2";
-import commonjs from "@rollup/plugin-commonjs";
-const postcss = require("rollup-plugin-postcss");
-
 export const babelConfigDefault = {
   presets: [
     "@babel/react",
@@ -15,6 +10,7 @@ export const babelConfigDefault = {
   ],
   plugins: ["@babel/proposal-object-rest-spread"],
 };
+
 export const postcssConfigDefault = {
   plugins: [
     require("postcss-preset-env"),

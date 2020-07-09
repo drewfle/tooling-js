@@ -1,4 +1,4 @@
-# `@drewfle/rollupper`
+# @drewfle/rollupper
 
 Rollupper is a CLI tool for building and bundling packages. The goal of Rollupper is to:
 

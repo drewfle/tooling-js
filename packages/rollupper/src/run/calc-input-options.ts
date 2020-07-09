@@ -42,12 +42,16 @@ export function calcInputOptions(
   localConfigPlugins?: Plugin[],
   localConfigWithoutPlugins?: Omit<InputOptions, "plugins" | "output">
 ) {
-  let calculatedOptions = mergeWithLocalInputConfig(
+  let calculatedOptions = configureInputOptions(
     inputOptionsDefault,
+    cliOptions
+  );
+  calculatedOptions = mergeWithLocalInputConfig(
+    calculatedOptions,
     localConfigPlugins,
     localConfigWithoutPlugins
   );
-  calculatedOptions = configureInputOptions(calculatedOptions, cliOptions);
+
   return calculatedOptions;
 }
 
