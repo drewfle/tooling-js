@@ -1,14 +1,19 @@
-import { RollupOptions, InputOptions, InputOption, Plugin } from "rollup";
+import { InputOptions, InputOption, Plugin } from "rollup";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "rollup-plugin-typescript2";
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 // Requiring modules without types
 const postcss = require("rollup-plugin-postcss");
+const { getBabelOutputPlugin } = require("@rollup/plugin-babel");
 
 import { RollupperCliOptions } from "../types";
 import { readLocalPackageJson } from "../utils";
-import { postcssConfigDefault, typescriptConfigDefault } from "../config";
+import {
+  babelConfigDefault,
+  postcssConfigDefault,
+  typescriptConfigDefault,
+} from "../config";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
@@ -34,6 +39,9 @@ export const inputOptionsDefault: InputOptionsDefault = {
     }),
     commonjs(),
     nodeResolve({ extensions }),
+    replace({
+      "process.env.NODE_ENV": process.env.NODE_ENV,
+    }),
   ],
 };
 
@@ -42,13 +50,43 @@ export function calcInputOptions(
   localConfigPlugins?: Plugin[],
   localConfigWithoutPlugins?: Omit<InputOptions, "plugins" | "output">
 ) {
-  let calculatedOptions = mergeWithLocalInputConfig(
+  let calculatedOptions = configureInputOptions(
     inputOptionsDefault,
+    cliOptions
+  );
+  calculatedOptions = mergeWithLocalInputConfig(
+    calculatedOptions,
     localConfigPlugins,
     localConfigWithoutPlugins
   );
-  calculatedOptions = configureInputOptions(calculatedOptions, cliOptions);
+
   return calculatedOptions;
+}
+
+function configureInputOptions(
+  optionsToBeConfigured: InputOptionsDefault,
+  cliOptions: RollupperCliOptions
+) {
+  const pkg = readLocalPackageJson();
+  const configuredOptions = optionsToBeConfigured;
+  const { output, babel, external } = cliOptions;
+
+  if (output === "browser" || babel) {
+    configuredOptions.plugins = [
+      getBabelOutputPlugin({
+        allowAllFormats: true,
+        ...babelConfigDefault,
+      }),
+    ];
+  }
+  if (external || output === "lib-es" || output === "lib-cjs") {
+    configuredOptions.external = [
+      ...Object.keys(pkg.dependencies || {}),
+      ...Object.keys(pkg.peerDependencies || {}),
+    ];
+  }
+
+  return configuredOptions;
 }
 
 function mergeWithLocalInputConfig(
@@ -69,28 +107,4 @@ function mergeWithLocalInputConfig(
   }
 
   return mergedOptions;
-}
-
-function configureInputOptions(
-  optionsToBeConfigured: InputOptionsDefault,
-  cliOptions: RollupperCliOptions
-) {
-  const pkg = readLocalPackageJson();
-  const configuredOptions = optionsToBeConfigured;
-
-  if (cliOptions.buildType === "lib") {
-    configuredOptions.external = [
-      ...Object.keys(pkg.dependencies || {}),
-      ...Object.keys(pkg.peerDependencies || {}),
-    ];
-  }
-  if (cliOptions.buildType === "bundle") {
-    configuredOptions.plugins.push(
-      replace({
-        "process.env.NODE_ENV": process.env.NODE_ENV,
-      })
-    );
-  }
-
-  return configuredOptions;
 }

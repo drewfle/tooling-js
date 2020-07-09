@@ -1,4 +1,3 @@
-import path from "path";
 import { Command } from "commander";
 import { RollupperCliOptions } from "./types";
 import { checkOptions, readLocalPackageJson } from "./utils";
@@ -13,15 +12,25 @@ rollupper
   )
   .version(pkg.version)
   .option(
-    "-f, --format <type>",
-    "Output module format, available values are amd, cjs, es, iife, system, and umd",
-    "es"
+    "-o, --output <type>",
+    `Build output. Available values are lib-es, lib-cjs, and browser.
+  lib-es: equivalent to passing -f es -es.
+  lib-cjs: equivalent to passing -f cjs -es.
+  browser: equivalent to passing -f iife -sb.`
   )
   .option(
-    "-b, --build-type <type>",
-    "Output build type, available values are lib and bundle",
-    "lib"
-  );
+    "-f, --format <type>",
+    "Output module format. Available values are amd, cjs, es, iife, system, and umd"
+  )
+  .option("-b, --babel", "Enable babel", false)
+  .option(
+    "-e, --external",
+    "Enable external to exclude specified dependencies. By default it excludes all dependencies.",
+    false
+  )
+  .option("-s, --source-map", "Enable source map", false)
+  .option("-t, --terser", "Enable terser", false);
+
 rollupper.parse(process.argv);
 checkOptions(rollupper);
 

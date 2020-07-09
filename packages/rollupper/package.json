@@ -16,8 +16,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Andrew Liu",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npm/cli.git"
+  },
   "dependencies": {
     "commander": "5.1.0",
     "@babel/cli": "7.10.4",
