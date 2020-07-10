@@ -8,13 +8,23 @@ export interface OutputOptionsDefault extends OutputOptions {
   plugins: Plugin[];
 }
 
-export const calcOutputOptionsDefault = (
-  cliOptions: RollupperCliOptions
-): OutputOptionsDefault => ({
-  file: `dist/index.${cliOptions.format}.js`,
-  format: cliOptions.format!,
-  plugins: [],
-});
+const outputFormatMap = {
+  "lib-es": "es",
+  "lib-cjs": "cjs",
+  browser: "iife",
+} as const;
+
+export const calcOutputOptionsDefault = ({
+  output,
+  format,
+}: RollupperCliOptions): OutputOptionsDefault => {
+  const extension = output ? outputFormatMap[output] : format;
+  return {
+    file: `dist/index.${extension}.js`,
+    format: extension!,
+    plugins: [],
+  };
+};
 
 export function calcOutputOptions(
   cliOptions: RollupperCliOptions,
@@ -43,11 +53,7 @@ function configureOutputOptions(
 
   if (output) {
     configuredOptions.sourcemap = true;
-    configuredOptions.format = ({
-      "lib-es": "es",
-      "lib-cjs": "cjs",
-      browser: "iife",
-    } as const)[output];
+    configuredOptions.format = outputFormatMap[output];
   }
   if (output === "browser" || format === "iife") {
     configuredOptions.name = "tsroll";
