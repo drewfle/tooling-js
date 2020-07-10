@@ -3,22 +3,25 @@ import fs from "fs";
 import { RollupOptions } from "rollup";
 import { RollupperCliOptions } from "./types";
 
-export const checkOptions = ({ buildType, format }: RollupperCliOptions) => {
-  const isOutputFormatSupported = [
-    "amd",
-    "cjs",
-    "es",
-    "iife",
-    "system",
-    "umd",
-  ].includes(format);
-  if (!isOutputFormatSupported) {
-    throw new Error(`Output format ${format} is not supported.`);
+export const checkOptions = ({ format, output }: RollupperCliOptions) => {
+  if (format !== undefined) {
+    const isFormatSupported = [
+      "amd",
+      "cjs",
+      "es",
+      "iife",
+      "system",
+      "umd",
+    ].includes(format);
+    if (!isFormatSupported) {
+      throw new Error(`Rollup Output format ${format} is not supported.`);
+    }
   }
-
-  const isOutputBuildTypeSupported = ["lib", "bundle"].includes(buildType);
-  if (!isOutputBuildTypeSupported) {
-    throw new Error(`Output build type ${buildType} is not supported.`);
+  if (output !== undefined) {
+    const isOutputSupported = ["lib-es", "lib-cjs", "browser"].includes(output);
+    if (!isOutputSupported) {
+      throw new Error(`Output type ${output} is not supported.`);
+    }
   }
 };
 

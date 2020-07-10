@@ -1,21 +1,19 @@
-import { RollupOptions, OutputOptions, ModuleFormat } from "rollup";
-import { terser } from "rollup-plugin-terser";
-// Requiring modules without types
-const { getBabelOutputPlugin } = require("@rollup/plugin-babel");
-
+import { RollupOptions, OutputOptions, ModuleFormat, Plugin } from "rollup";
+import { terser as terserPlugin } from "rollup-plugin-terser";
 import { RollupperCliOptions } from "../types";
-import { babelConfigDefault } from "../config";
 
 export interface OutputOptionsDefault extends OutputOptions {
   file: string;
   format: ModuleFormat;
+  plugins: Plugin[];
 }
 
 export const calcOutputOptionsDefault = (
   cliOptions: RollupperCliOptions
 ): OutputOptionsDefault => ({
   file: `dist/index.${cliOptions.format}.js`,
-  format: cliOptions.format,
+  format: cliOptions.format!,
+  plugins: [],
 });
 
 export function calcOutputOptions(
@@ -36,6 +34,34 @@ export function calcOutputOptions(
   return calculatedOptions;
 }
 
+function configureOutputOptions(
+  optionsToBeConfigured: OutputOptionsDefault,
+  cliOptions: RollupperCliOptions
+) {
+  const configuredOptions = optionsToBeConfigured;
+  const { output, format, sourceMap, terser } = cliOptions;
+
+  if (output) {
+    configuredOptions.sourcemap = true;
+    configuredOptions.format = ({
+      "lib-es": "es",
+      "lib-cjs": "cjs",
+      browser: "iife",
+    } as const)[output];
+  }
+  if (output === "browser" || format === "iife") {
+    configuredOptions.name = "tsroll";
+  }
+  if (sourceMap) {
+    configuredOptions.sourcemap = true;
+  }
+  if (terser) {
+    configuredOptions.plugins.push(terserPlugin());
+  }
+
+  return configuredOptions;
+}
+
 function mergeWithLocalOutputConfig(
   optionsToBeMerged: OutputOptionsDefault,
   localConfigOutput: OutputOptions | undefined
@@ -45,29 +71,4 @@ function mergeWithLocalOutputConfig(
   }
   const mergedOptions = { ...optionsToBeMerged, ...localConfigOutput };
   return mergedOptions;
-}
-
-function configureOutputOptions(
-  optionsToBeConfigured: OutputOptionsDefault,
-  cliOptions: RollupperCliOptions
-) {
-  const configuredOptions = optionsToBeConfigured;
-  if (cliOptions.format === "iife") {
-    configuredOptions.name = "rollupper";
-  }
-  if (cliOptions.buildType === "lib") {
-    configuredOptions.sourcemap = true;
-  } else if (cliOptions.buildType === "bundle") {
-    configuredOptions.plugins = [
-      getBabelOutputPlugin({
-        allowAllFormats: true,
-        ...babelConfigDefault,
-      }),
-    ];
-    configuredOptions.sourcemap = false;
-  }
-  if (cliOptions.terser) {
-    configuredOptions.plugins!.push(terser());
-  }
-  return configuredOptions;
 }

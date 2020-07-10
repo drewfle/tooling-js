@@ -14,19 +14,22 @@ rollupper
   .option(
     "-o, --output <type>",
     `Build output. Available values are lib-es, lib-cjs, and browser.
-  - lib-es: equivalent to passing -f es -es.
-  - lib-cjs: equivalent to passing -f cjs -es.
-  - browser: equivalent to passing -f iife -sb.`,
-    "browser"
+  lib-es: equivalent to passing -f es -es.
+  lib-cjs: equivalent to passing -f cjs -es.
+  browser: equivalent to passing -f iife -sb.`
   )
   .option(
     "-f, --format <type>",
     "Output module format. Available values are amd, cjs, es, iife, system, and umd"
   )
-  .option("-e, --external-all", "Enable externalizing all dependencies.")
-  .option("-b, --babel", "Enable babel")
-  .option("-t, --terser", "Enable terser")
-  .option("-s, --source-map", "Enable source map");
+  .option("-b, --babel", "Enable babel", false)
+  .option(
+    "-e, --external",
+    "Enable external to exclude specified dependencies. By default it excludes all dependencies.",
+    false
+  )
+  .option("-s, --source-map", "Enable source map", false)
+  .option("-t, --terser", "Enable terser", false);
 
 rollupper.parse(process.argv);
 checkOptions(rollupper);
