@@ -1,11 +1,11 @@
 import { Command } from "commander";
-import { bundlerCliOptions } from "./types";
+import { BundlerCliOptions } from "./types";
 import { checkOptions, readLocalPackageJson } from "./utils";
 import { build } from "./run";
 
 const pkg = readLocalPackageJson();
 
-const bundler = new Command() as bundlerCliOptions;
+const bundler = new Command() as BundlerCliOptions;
 bundler
   .description(
     "Drewfle Bundler is a CLI tool for building and bundling packages. It laverages Rollup API and abstract away common dev dependencies."

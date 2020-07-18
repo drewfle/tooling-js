@@ -16,7 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Andrew Liu",
+  "author": "Andrew Liu <andrewliustudio@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
