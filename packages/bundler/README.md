@@ -1,6 +1,6 @@
-# @drewfle/rollupper
+# @drewfle/bundler
 
-Rollupper is a CLI tool for building and bundling packages that laverages Rollup API and abstract away common dev dependencies. Rollupper offers:
+Drewfle Bundler is a CLI tool for building and bundling packages that laverages Rollup API and abstract away common dev dependencies. bundler offers:
 
 1. Out-of-box Typescript and PostCSS support for building libraries and web apps.
 1. Options for Babel and Terser support for bundling web apps.
@@ -8,10 +8,10 @@ Rollupper is a CLI tool for building and bundling packages that laverages Rollup
 ## Usages
 
 ```
-$ rollupper -h
+$ drewfle-bundler -h
 Usage: index [options]
 
-Rollupper is a CLI tool for building and bundling packages. It laverages Rollup API and abstract away common dev dependencies.
+Drewfle Bundler is a CLI tool for building and bundling packages. It laverages Rollup API and abstract away common dev dependencies.
 
 Options:
   -V, --version        output the version number

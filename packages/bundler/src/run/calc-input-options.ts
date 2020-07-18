@@ -7,7 +7,7 @@ import replace from "@rollup/plugin-replace";
 const postcss = require("rollup-plugin-postcss");
 const { getBabelOutputPlugin } = require("@rollup/plugin-babel");
 
-import { RollupperCliOptions } from "../types";
+import { BundlerCliOptions } from "../types";
 import { readLocalPackageJson } from "../utils";
 import {
   babelConfigDefault,
@@ -46,7 +46,7 @@ export const inputOptionsDefault: InputOptionsDefault = {
 };
 
 export function calcInputOptions(
-  cliOptions: RollupperCliOptions,
+  cliOptions: BundlerCliOptions,
   localConfigPlugins?: Plugin[],
   localConfigWithoutPlugins?: Omit<InputOptions, "plugins" | "output">
 ) {
@@ -65,7 +65,7 @@ export function calcInputOptions(
 
 function configureInputOptions(
   optionsToBeConfigured: InputOptionsDefault,
-  cliOptions: RollupperCliOptions
+  cliOptions: BundlerCliOptions
 ) {
   const pkg = readLocalPackageJson();
   const configuredOptions = optionsToBeConfigured;

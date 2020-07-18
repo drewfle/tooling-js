@@ -2,9 +2,9 @@ import { rollup } from "rollup";
 import { calcInputOptions } from "./calc-input-options";
 import { calcOutputOptions } from "./calc-output-options";
 import { readLocalRollupConfig } from "../utils";
-import { RollupperCliOptions } from "../types";
+import { BundlerCliOptions } from "../types";
 
-export async function build(cliOptions: RollupperCliOptions) {
+export async function build(cliOptions: BundlerCliOptions) {
   const localOptions = readLocalRollupConfig();
   const {
     output: localConfigOutput,

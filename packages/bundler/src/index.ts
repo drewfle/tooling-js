@@ -1,14 +1,14 @@
 import { Command } from "commander";
-import { RollupperCliOptions } from "./types";
+import { BundlerCliOptions } from "./types";
 import { checkOptions, readLocalPackageJson } from "./utils";
 import { build } from "./run";
 
 const pkg = readLocalPackageJson();
 
-const rollupper = new Command() as RollupperCliOptions;
-rollupper
+const bundler = new Command() as BundlerCliOptions;
+bundler
   .description(
-    "Rollupper is a CLI tool for building and bundling packages. It laverages Rollup API and abstract away common dev dependencies."
+    "Drewfle Bundler is a CLI tool for building and bundling packages. It laverages Rollup API and abstract away common dev dependencies."
   )
   .version(pkg.version)
   .option(
@@ -31,7 +31,7 @@ rollupper
   .option("-s, --source-map", "Enable source map", false)
   .option("-t, --terser", "Enable terser", false);
 
-rollupper.parse(process.argv);
-checkOptions(rollupper);
+bundler.parse(process.argv);
+checkOptions(bundler);
 
-build(rollupper);
+build(bundler);

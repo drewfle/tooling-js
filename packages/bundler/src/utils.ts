@@ -1,9 +1,9 @@
 import path from "path";
 import fs from "fs";
 import { RollupOptions } from "rollup";
-import { RollupperCliOptions } from "./types";
+import { BundlerCliOptions } from "./types";
 
-export const checkOptions = ({ format, output }: RollupperCliOptions) => {
+export const checkOptions = ({ format, output }: BundlerCliOptions) => {
   if (format !== undefined) {
     const isFormatSupported = [
       "amd",
