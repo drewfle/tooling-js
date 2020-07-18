@@ -1,0 +1,16 @@
+{
+  "name": "@drewfle/examples",
+  "private": true,
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "build:ts-node": "drewfle-bundler",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@drewfle/bundler": "*",
+    "typescript": "3.9.6"
+  },
+  "author": "Andrew Liu <andrewliustudio@gmail.com>",
+  "license": "ISC"
+}
