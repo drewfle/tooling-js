@@ -1,6 +1,6 @@
 import { RollupOptions, OutputOptions, ModuleFormat, Plugin } from "rollup";
 import { terser as terserPlugin } from "rollup-plugin-terser";
-import { RollupperCliOptions } from "../types";
+import { BundlerCliOptions } from "../types";
 
 export interface OutputOptionsDefault extends OutputOptions {
   file: string;
@@ -17,7 +17,7 @@ const outputFormatMap = {
 export const calcOutputOptionsDefault = ({
   output,
   format,
-}: RollupperCliOptions): OutputOptionsDefault => {
+}: BundlerCliOptions): OutputOptionsDefault => {
   const extension = output ? outputFormatMap[output] : format;
   return {
     file: `dist/index.${extension}.js`,
@@ -27,7 +27,7 @@ export const calcOutputOptionsDefault = ({
 };
 
 export function calcOutputOptions(
-  cliOptions: RollupperCliOptions,
+  cliOptions: BundlerCliOptions,
   localOptons: RollupOptions | undefined
 ) {
   const outputOptionsDefault = calcOutputOptionsDefault(cliOptions);
@@ -46,7 +46,7 @@ export function calcOutputOptions(
 
 function configureOutputOptions(
   optionsToBeConfigured: OutputOptionsDefault,
-  cliOptions: RollupperCliOptions
+  cliOptions: BundlerCliOptions
 ) {
   const configuredOptions = optionsToBeConfigured;
   const { output, format, sourceMap, terser } = cliOptions;

@@ -1,9 +1,9 @@
 {
-  "name": "@drewfle/rollupper",
+  "name": "@drewfle/bundler",
   "version": "1.0.2",
   "description": "",
   "bin": {
-    "rollupper": "cli.js"
+    "drewfle-bundler": "cli.js"
   },
   "main": "dist/index.js",
   "types": "dist/types/index.ts",
