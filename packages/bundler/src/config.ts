@@ -26,11 +26,11 @@ export const typescriptConfigDefault = {
   compilerOptions: {
     allowSyntheticDefaultImports: true,
     noFallthroughCasesInSwitch: true,
-    noUnusedParameters: false,
+    noUnusedParameters: true,
     noImplicitReturns: true,
     moduleResolution: "node",
     esModuleInterop: true,
-    noUnusedLocals: false,
+    noUnusedLocals: true,
     noImplicitAny: true,
     declarationDir: "dist/types",
     declaration: true,

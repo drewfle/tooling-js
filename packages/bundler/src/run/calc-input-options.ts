@@ -1,4 +1,4 @@
-import { InputOptions, InputOption, Plugin } from "rollup";
+import { InputOptions, Plugin } from "rollup";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "rollup-plugin-typescript2";
 import commonjs from "@rollup/plugin-commonjs";
@@ -17,13 +17,11 @@ import {
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
-export interface InputOptionsDefault extends InputOptions {
-  input: InputOption;
+export type InputOptionsDefault = {
   plugins: Plugin[];
-}
+} & InputOptions;
 
 export const inputOptionsDefault: InputOptionsDefault = {
-  input: "src/index.ts",
   plugins: [
     postcss({
       extract: true,
@@ -69,8 +67,9 @@ function configureInputOptions(
 ) {
   const pkg = readLocalPackageJson();
   const configuredOptions = optionsToBeConfigured;
-  const { output, babel, external } = cliOptions;
+  const { output, src, babel, external } = cliOptions;
 
+  configuredOptions.input = !src.includes("/") ? `${src}/index.ts` : src;
   if (output === "browser" || babel) {
     configuredOptions.plugins = [
       getBabelOutputPlugin({
