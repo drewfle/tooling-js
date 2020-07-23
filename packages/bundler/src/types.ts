@@ -4,6 +4,7 @@ import { InternalModuleFormat } from "rollup";
 export interface BundlerCliOptions extends commander.Command {
   output: "lib-es" | "lib-cjs" | "browser";
   format?: InternalModuleFormat;
+  watch: boolean;
   babel: boolean;
   external: boolean;
   sourceMap: boolean;
