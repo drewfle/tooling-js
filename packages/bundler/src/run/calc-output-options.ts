@@ -26,6 +26,7 @@ export const calcOutputOptionsDefault = ({
     : !dist.includes("/")
     ? `${dist}/index.${extension}.js`
     : dist;
+
   return {
     file,
     format: extension!,

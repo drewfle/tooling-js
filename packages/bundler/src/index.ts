@@ -22,6 +22,7 @@ bundler
   )
   .option("--src <type>", "Source file path", "src/index.ts")
   .option("--dist <type>", "Dist file path", "dist/index.<format>.js")
+  .option("-w, --watch", "Enable watch mode", false)
   .option("-b, --babel", "Enable babel", false)
   .option(
     "-e, --external",
