@@ -17,7 +17,6 @@ export const postcssConfigDefault = {
     require("postcss-import"),
     require("postcss-mixins"), // before simple vars and nested
     require("postcss-nested"),
-    require("postcss-css-variables"),
     require("postcss-modules"),
   ],
 };
