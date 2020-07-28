@@ -1,2 +1,2 @@
-export const foo: string = "foo";
-export const doThis = (x: number) => x * 1000;
+import { foo } from "./foo";
+export const doThis = (x: number) => `${foo}: ${x * 1000}`;

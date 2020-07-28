@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
+    "start": "rollup -c -w",
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +24,7 @@
     "url": "https://github.com/drewfle/tooling.git"
   },
   "dependencies": {
+    "chalk": "4.1.0",
     "commander": "5.1.0",
     "@babel/cli": "7.10.4",
     "@babel/core": "7.10.4",

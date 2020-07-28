@@ -17,6 +17,7 @@ export default {
     resolve({ extensions })
   ],
   external: [
+    'fs', 'path',
     ...Object.keys(pkg.dependencies || {}),
     ...Object.keys(pkg.peerDependencies || {})
   ],
