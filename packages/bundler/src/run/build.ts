@@ -3,6 +3,7 @@ import { calcInputOptions } from "./calc-input-options";
 import { calcOutputOptions } from "./calc-output-options";
 import { readLocalRollupConfig } from "../utils";
 import { BundlerCliOptions } from "../types";
+import { logEvents } from "./watch";
 
 export async function build(cliOptions: BundlerCliOptions) {
   const localOptions = readLocalRollupConfig();
@@ -33,6 +34,9 @@ export async function build(cliOptions: BundlerCliOptions) {
       ...inputOptions,
       output: [outputOptions],
     };
-    watch(watchOptions);
+    const watcher = watch(watchOptions);
+    watcher.on("event", (event) => {
+      logEvents(event);
+    });
   }
 }
