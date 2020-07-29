@@ -35,7 +35,6 @@ export async function build(cliOptions: BundlerCliOptions) {
       output: [outputOptions],
     };
     const watcher = watch(watchOptions);
-    // const watchrequire('../shared/watch-cli.js');
     watcher.on("event", (event) => {
       logEvents(event);
     });
