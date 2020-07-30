@@ -5,6 +5,8 @@
   "version": "1.0.0",
   "scripts": {
     "build:ts-node": "drewfle-bundler --src src-ts-node --dist dist-ts-node -w",
+    "build:ts-node2": "drewfle-bundler rollup --src src-ts-node --dist dist-ts-node -w",
+    "build:ts-node3": "drewfle-bundler rollup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
