@@ -1,11 +1,13 @@
-import { rollup, watch } from "rollup";
 import { calcInputOptions } from "./calc-input-options";
 import { calcOutputOptions } from "./calc-output-options";
-import { readLocalRollupConfig } from "../utils";
+import { checkOptions, readLocalRollupConfig } from "../utils";
 import { BundlerCliOptions } from "../types";
-import { logEvents } from "./watch";
+import { build } from "./build";
+import { watch } from "./watch";
 
-export async function build(cliOptions: BundlerCliOptions) {
+export async function run(cliOptions: BundlerCliOptions) {
+  checkOptions(cliOptions);
+
   const localOptions = readLocalRollupConfig();
   const {
     output: localConfigOutput,
@@ -27,16 +29,8 @@ export async function build(cliOptions: BundlerCliOptions) {
   const outputOptions = calcOutputOptions(cliOptions, localConfigOutput);
 
   if (!cliOptions.watch) {
-    const bundle = await rollup(inputOptions);
-    await bundle.write(outputOptions!);
+    await build(inputOptions, outputOptions);
   } else {
-    const watchOptions = {
-      ...inputOptions,
-      output: [outputOptions],
-    };
-    const watcher = watch(watchOptions);
-    watcher.on("event", (event) => {
-      logEvents(event);
-    });
+    watch(inputOptions, outputOptions);
   }
 }

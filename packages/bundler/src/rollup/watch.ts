@@ -1,6 +1,22 @@
-import { RollupWatcherEvent, RollupError } from "rollup";
+import { RollupWatcherEvent, RollupError, watch as rollupWatch } from "rollup";
 import chalk from "chalk";
+import { InputOptionsDefault } from "./calc-input-options";
+import { OutputOptionsDefault } from "./calc-output-options";
 const path = require("path");
+
+export const watch = (
+  inputOptions: InputOptionsDefault,
+  outputOptions: OutputOptionsDefault
+) => {
+  const watchOptions = {
+    ...inputOptions,
+    output: [outputOptions],
+  };
+  const watcher = rollupWatch(watchOptions);
+  watcher.on("event", (event) => {
+    logEvents(event);
+  });
+};
 
 export const logEvents = (event: RollupWatcherEvent) => {
   const { code } = event;
