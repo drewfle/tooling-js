@@ -1,3 +1,3 @@
-import { cli } from "./rollup";
+import { bundler } from "./cli";
 
-cli();
+export default bundler;
