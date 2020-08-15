@@ -1,0 +1,29 @@
+{
+  "name": "@drewfle/config",
+  "version": "0.1.0",
+  "description": "> TODO: description",
+  "author": "Andrew Liu <andrewliustudio@gmail.com>",
+  "homepage": "https://github.com/drewfle/tooling#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drewfle/tooling.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "7.10.4",
+    "@babel/preset-env": "7.10.4",
+    "@babel/preset-react": "7.10.4",
+    "@babel/plugin-proposal-class-properties": "7.10.4",
+    "postcss-import": "12.0.1",
+    "postcss-mixins": "6.2.3",
+    "postcss-nested": "4.2.1",
+    "postcss-preset-env": "6.7.0",
+    "postcss-modules": "3.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/drewfle/tooling/issues"
+  }
+}
