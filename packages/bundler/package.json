@@ -1,6 +1,6 @@
 {
   "name": "@drewfle/bundler",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "",
   "bin": {
     "drewfle-bundler": "cli.js"
@@ -24,28 +24,21 @@
     "url": "https://github.com/drewfle/tooling.git"
   },
   "dependencies": {
+    "@drewfle/config": "*",
     "chalk": "4.1.0",
     "commander": "5.1.0",
     "@babel/cli": "7.10.4",
     "@babel/core": "7.10.4",
-    "@babel/plugin-proposal-class-properties": "7.10.4",
-    "@babel/preset-env": "7.10.4",
-    "@babel/preset-typescript": "7.10.4",
-    "@babel/preset-react": "7.10.4",
     "rollup": "2.18.1",
     "rollup-plugin-postcss": "3.1.2",
     "rollup-plugin-typescript2": "0.27.1",
     "rollup-plugin-terser": "6.1.0",
+    "rollup-plugin-serve": "1.0.3",
     "@rollup/plugin-node-resolve": "8.1.0",
     "@rollup/plugin-replace": "2.3.3",
     "@rollup/plugin-commonjs": "13.0.0",
     "@rollup/plugin-babel": "5.0.4",
     "postcss-loader": "3.0.0",
-    "postcss-import": "12.0.1",
-    "postcss-mixins": "6.2.3",
-    "postcss-nested": "4.2.1",
-    "postcss-preset-env": "6.7.0",
-    "postcss-modules": "3.1.0",
     "typescript-plugin-css-modules": "2.3.0"
   },
   "devDependencies": {

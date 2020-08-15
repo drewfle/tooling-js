@@ -4,11 +4,17 @@
   "description": "",
   "version": "1.0.0",
   "scripts": {
-    "build:ts-node": "drewfle-bundler rollup --src src-ts-node --dist dist-ts-node -w",
+    "build:ts-node": "drewfle-bundler rollup --src src-ts-node --dist dist-ts-node",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   },
   "devDependencies": {
     "@drewfle/bundler": "*",
+    "@types/react": "16.8.24",
+    "@types/react-dom": "16.9.8",
     "typescript": "3.9.6"
   },
   "author": "Andrew Liu <andrewliustudio@gmail.com>",
