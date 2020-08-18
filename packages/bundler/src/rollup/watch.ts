@@ -61,7 +61,7 @@ export const logEvents = (event: RollupWatcherEvent) => {
       const fileString = `bundle${plural(output)}`;
       const formatedOutput = format(output);
       console.info(
-        chalk`{blue Built ${fileString} in ${duration}ms: ${formatedOutput}}`
+        chalk`{blueBright Built ${fileString} in ${duration}ms: ${formatedOutput}}`
       );
     },
     END() {
