@@ -3,6 +3,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "rollup-plugin-typescript2";
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
+import path from "path";
 const postcss = require("rollup-plugin-postcss");
 const { getBabelOutputPlugin } = require("@rollup/plugin-babel");
 const baseTsConfig = require("@drewfle/config/typescript/tsconfig-base.json");
@@ -11,16 +12,6 @@ const baseBabelConfig = require("@drewfle/config/babel/babel.config-base.json");
 
 import { BundlerCliOptions } from "../types";
 import { readLocalPackageJson } from "../utils";
-
-const babelConfigDefault = { ...baseBabelConfig };
-const postcssConfigDefault = {
-  ...basePostCssConfig,
-};
-const typescriptConfigDefault = {
-  ...baseTsConfig,
-  include: ["src-ts-node/**/*"],
-  exclude: ["node_modules", "dist-ts-node"],
-};
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
@@ -34,7 +25,7 @@ export const getInputOptionsDefault = (tsconfig: any): InputOptionsDefault => ({
       extract: true,
       options: {
         config: {
-          ctx: postcssConfigDefault,
+          ctx: basePostCssConfig,
         },
       },
     }),
@@ -55,7 +46,20 @@ export function calcInputOptions(
   localConfigPlugins?: Plugin[],
   localConfigWithoutPlugins?: Omit<InputOptions, "plugins" | "output">
 ) {
-  const tsconfig = { ...typescriptConfigDefault };
+  const {
+    compilerOptions: baseCompilerOptions,
+    ...restBaseTsConfig
+  } = baseTsConfig;
+  const tsconfig = {
+    compilerOptions: {
+      ...baseCompilerOptions,
+      declarationDir: path.join(path.dirname(cliOptions.dist), "types"),
+    },
+    ...restBaseTsConfig,
+    include: ["src-ts-node/**/*"],
+    exclude: ["node_modules", "dist-ts-node"],
+  };
+
   const inputOptionsDefault = getInputOptionsDefault(tsconfig);
   let calculatedOptions = configureInputOptions(
     inputOptionsDefault,
@@ -78,12 +82,12 @@ function configureInputOptions(
   const configuredOptions = optionsToBeConfigured;
   const { output, src, babel, external } = cliOptions;
 
-  configuredOptions.input = calcSrc(src);
+  configuredOptions.input = src;
   if (output === "browser" || babel) {
     configuredOptions.plugins = [
       getBabelOutputPlugin({
         allowAllFormats: true,
-        ...babelConfigDefault,
+        ...baseBabelConfig,
       }),
     ];
   }
@@ -115,8 +119,4 @@ function mergeWithLocalInputConfig(
   }
 
   return mergedOptions;
-}
-
-function calcSrc(src: string) {
-  return !src.includes("/") ? `${src}/index.ts` : src;
 }

@@ -4,7 +4,7 @@
   "description": "",
   "version": "1.0.0",
   "scripts": {
-    "build:ts-node": "drewfle-bundler rollup --src src-ts-node --dist dist-ts-node",
+    "build:ts-node": "drewfle-bundler rollup --src src-ts-node/index.ts --dist dist-ts-node/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
