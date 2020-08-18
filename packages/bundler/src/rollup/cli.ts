@@ -15,8 +15,8 @@ export const cli = (bundler: command.Command) => {
       "-f, --format <type>",
       "Output module format. Available values are amd, cjs, es, iife, system, and umd"
     )
-    .option("--src <type>", "Source file path", "src/index.ts")
-    .option("--dist <type>", "Dist file path", "dist/index.<format>.js")
+    .option("--src <path>", "Source file path", "src/index.ts")
+    .option("--dist <path>", "Dist file path", "dist/bundle.js")
     .option("-w, --watch", "Enable watch mode", false)
     .option("-b, --babel", "Enable babel", false)
     .option(
