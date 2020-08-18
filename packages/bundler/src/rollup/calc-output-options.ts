@@ -3,7 +3,6 @@ import { terser as terserPlugin } from "rollup-plugin-terser";
 import { BundlerCliOptions } from "../types";
 
 export interface OutputOptionsDefault extends OutputOptions {
-  // file: string;
   format: ModuleFormat;
   plugins: Plugin[];
 }
@@ -20,12 +19,7 @@ export const calcOutputOptionsDefault = ({
   dist,
 }: BundlerCliOptions): OutputOptionsDefault => {
   const extension = format ? format : outputFormatMap[output];
-  const formatString = "<format>";
-  const file = dist.includes(formatString)
-    ? dist.replace(formatString, extension)
-    : !dist.includes("/")
-    ? `${dist}/index.${extension}.js`
-    : dist;
+  const file = dist;
 
   return {
     file,
