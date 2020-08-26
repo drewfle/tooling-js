@@ -38,3 +38,26 @@ export const readLocalRollupConfig = (): RollupOptions | undefined => {
     ? require(rollupConfigPath)
     : undefined;
 };
+
+type BabelOption = string | any[];
+type BabelConfig = {
+  presets?: BabelOption[];
+  plugins?: BabelOption[];
+};
+export function patchBabelConfigModulePaths(babelConfig: BabelConfig) {
+  const modulePath = "./node_modules/@drewfle/bundler/node_modules";
+  const result: BabelConfig = {};
+  const patch = (options: BabelOption[]) =>
+    options.map((option) =>
+      Array.isArray(option)
+        ? [`${modulePath}/${option[0]}`, option[1]]
+        : `${modulePath}/${option}`
+    );
+  if (babelConfig.presets) {
+    result.presets = patch(babelConfig.presets);
+  }
+  if (babelConfig.plugins) {
+    result.plugins = patch(babelConfig.plugins);
+  }
+  return result;
+}

@@ -5,13 +5,15 @@ import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import path from "path";
 const postcss = require("rollup-plugin-postcss");
+const servePlugin = require("rollup-plugin-serve");
+const livereload = require("rollup-plugin-livereload");
 const { getBabelOutputPlugin } = require("@rollup/plugin-babel");
 const baseTsConfig = require("@drewfle/config/typescript/tsconfig-base.json");
 const basePostCssConfig = require("@drewfle/config/postcss/postcss.config-base.js");
-const baseBabelConfig = require("@drewfle/config/babel/babel.config-base.json");
+const baseBabelConfig = require("@drewfle/config/babel/babel.config-base.js");
 
 import { BundlerCliOptions } from "../types";
-import { readLocalPackageJson } from "../utils";
+import { patchBabelConfigModulePaths, readLocalPackageJson } from "../utils";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
@@ -80,14 +82,16 @@ function configureInputOptions(
 ) {
   const pkg = readLocalPackageJson();
   const configuredOptions = optionsToBeConfigured;
-  const { output, src, babel, external } = cliOptions;
+  const { output, src, serve, babel, external } = cliOptions;
 
   configuredOptions.input = src;
   if (output === "browser" || babel) {
+    const patchedBabelConfig = patchBabelConfigModulePaths(baseBabelConfig);
     configuredOptions.plugins = [
+      ...configuredOptions.plugins,
       getBabelOutputPlugin({
         allowAllFormats: true,
-        ...baseBabelConfig,
+        ...patchedBabelConfig,
       }),
     ];
   }
@@ -95,6 +99,13 @@ function configureInputOptions(
     configuredOptions.external = [
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
+    ];
+  }
+  if (serve) {
+    configuredOptions.plugins = [
+      ...configuredOptions.plugins,
+      servePlugin(),
+      livereload(),
     ];
   }
 
