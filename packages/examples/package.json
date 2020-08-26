@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "build:ts-node": "drewfle-bundler rollup --src src-ts-node/index.ts --dist dist-ts-node/bundle.js",
+    "build:ts-react": "drewfle-bundler rollup --src src-ts-react/index.tsx --dist dist-ts-react/bundle.js -o browser",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -13,6 +14,7 @@
   },
   "devDependencies": {
     "@drewfle/bundler": "*",
+    "@drewfle/config": "*",
     "@types/react": "16.8.24",
     "@types/react-dom": "16.9.8",
     "typescript": "3.9.6"

@@ -17,7 +17,8 @@ export const cli = (bundler: command.Command) => {
     )
     .option("--src <path>", "Source file path", "src/index.ts")
     .option("--dist <path>", "Dist file path", "dist/bundle.js")
-    .option("-w, --watch", "Enable watch mode", false)
+    .option("--watch", "Enable watch mode", false)
+    .option("--serve", "Enable server", false)
     .option("-b, --babel", "Enable babel", false)
     .option(
       "-e, --external",
