@@ -34,6 +34,7 @@ export const getInputOptionsDefault = (tsconfig: any): InputOptionsDefault => ({
     typescript({
       useTsconfigDeclarationDir: true,
       tsconfigDefaults: tsconfig,
+      // tsconfig: ".tsconfig.json",
     }),
     commonjs(),
     nodeResolve({ extensions }),
@@ -48,6 +49,8 @@ export function calcInputOptions(
   localConfigPlugins?: Plugin[],
   localConfigWithoutPlugins?: Omit<InputOptions, "plugins" | "output">
 ) {
+  const srcDir = path.dirname(cliOptions.src);
+  const distDir = path.dirname(cliOptions.dist);
   const {
     compilerOptions: baseCompilerOptions,
     ...restBaseTsConfig
@@ -55,11 +58,11 @@ export function calcInputOptions(
   const tsconfig = {
     compilerOptions: {
       ...baseCompilerOptions,
-      declarationDir: path.join(path.dirname(cliOptions.dist), "types"),
+      declarationDir: path.join(distDir, "types"),
     },
     ...restBaseTsConfig,
-    include: ["src-ts-node/**/*"],
-    exclude: ["node_modules", "dist-ts-node"],
+    include: [`${srcDir}/**/*`],
+    exclude: ["node_modules", distDir],
   };
 
   const inputOptionsDefault = getInputOptionsDefault(tsconfig);
