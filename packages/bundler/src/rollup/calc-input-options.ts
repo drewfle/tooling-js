@@ -25,6 +25,7 @@ export const getInputOptionsDefault = (tsconfig: any): InputOptionsDefault => ({
   plugins: [
     postcss({
       extract: true,
+      modules: true,
       options: {
         config: {
           ctx: basePostCssConfig,
@@ -34,7 +35,6 @@ export const getInputOptionsDefault = (tsconfig: any): InputOptionsDefault => ({
     typescript({
       useTsconfigDeclarationDir: true,
       tsconfigDefaults: tsconfig,
-      // tsconfig: ".tsconfig.json",
     }),
     commonjs(),
     nodeResolve({ extensions }),
