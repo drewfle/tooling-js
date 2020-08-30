@@ -107,8 +107,13 @@ function configureInputOptions(
   if (serve) {
     configuredOptions.plugins = [
       ...configuredOptions.plugins,
-      servePlugin(),
-      livereload(),
+      servePlugin({
+        open: false,
+        contentBase: "dist",
+        host: "192.168.1.199",
+        port: 10001,
+      }),
+      livereload("dist"),
     ];
   }
 
