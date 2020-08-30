@@ -1,5 +1,6 @@
 import { RollupOptions, OutputOptions, ModuleFormat, Plugin } from "rollup";
 import { terser as terserPlugin } from "rollup-plugin-terser";
+const html = require("@rollup/plugin-html");
 import { BundlerCliOptions } from "../types";
 
 export interface OutputOptionsDefault extends OutputOptions {
@@ -51,7 +52,7 @@ function configureOutputOptions(
   cliOptions: BundlerCliOptions
 ) {
   const configuredOptions = optionsToBeConfigured;
-  const { output, format, sourceMap, terser } = cliOptions;
+  const { output, format, sourceMap, terser, serve } = cliOptions;
 
   if (output) {
     configuredOptions.sourcemap = true;
@@ -65,6 +66,30 @@ function configureOutputOptions(
   }
   if (terser) {
     configuredOptions.plugins.push(terserPlugin());
+  }
+  if (serve) {
+    if (
+      output === "browser" ||
+      (format && ["iife", "es", "umd"].includes(format))
+    ) {
+      configuredOptions.plugins.push(
+        html({
+          template: () => `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rollup Bundle</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+`,
+        })
+      );
+    }
   }
 
   return configuredOptions;
