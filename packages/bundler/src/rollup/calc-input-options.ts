@@ -85,7 +85,7 @@ function configureInputOptions(
 ) {
   const pkg = readLocalPackageJson();
   const configuredOptions = optionsToBeConfigured;
-  const { output, src, serve, babel, external } = cliOptions;
+  const { dist, output, src, serve, babel, external } = cliOptions;
 
   configuredOptions.input = src;
   if (output === "browser" || babel) {
@@ -105,11 +105,12 @@ function configureInputOptions(
     ];
   }
   if (serve) {
+    const contentBase = path.dirname(dist);
     configuredOptions.plugins = [
       ...configuredOptions.plugins,
       servePlugin({
         open: false,
-        contentBase: "dist",
+        contentBase,
         host: "192.168.1.199",
         port: 10001,
       }),
