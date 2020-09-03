@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { RollupOptions } from "rollup";
+import os from "os";
 import { BundlerCliOptions } from "./types";
 
 export const checkOptions = ({ format, output }: BundlerCliOptions) => {
@@ -60,4 +61,22 @@ export function patchBabelConfigModulePaths(babelConfig: BabelConfig) {
     result.plugins = patch(babelConfig.plugins);
   }
   return result;
+}
+
+export function getLocalIp() {
+  const networkInterfaces = os.networkInterfaces();
+  const ifaces = Object.values(networkInterfaces).reduce((acc, iface) =>
+    iface && acc ? [...acc, ...iface] : acc
+  );
+  const localIp =
+    ifaces &&
+    ifaces.reduce(
+      (ip, { family, internal, address }) =>
+        ip === undefined && family === "IPv4" && internal === false
+          ? address
+          : ip,
+      undefined as string | undefined
+    );
+
+  return localIp;
 }
