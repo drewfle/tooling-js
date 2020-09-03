@@ -13,7 +13,11 @@ const basePostCssConfig = require("@drewfle/config/postcss/postcss.config-base.j
 const baseBabelConfig = require("@drewfle/config/babel/babel.config-base.js");
 
 import { BundlerCliOptions } from "../types";
-import { patchBabelConfigModulePaths, readLocalPackageJson } from "../utils";
+import {
+  patchBabelConfigModulePaths,
+  readLocalPackageJson,
+  getLocalIp,
+} from "../utils";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
@@ -106,12 +110,13 @@ function configureInputOptions(
   }
   if (serve) {
     const contentBase = path.dirname(dist);
+    const host = getLocalIp();
     configuredOptions.plugins = [
       ...configuredOptions.plugins,
       servePlugin({
         open: false,
         contentBase,
-        host: "192.168.1.199",
+        host,
         port: 10001,
       }),
       livereload("dist"),
