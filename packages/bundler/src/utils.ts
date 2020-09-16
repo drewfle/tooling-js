@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import { RollupOptions } from "rollup";
 import os from "os";
-import { BundlerCliOptions } from "./types";
+import { BundlerCliOptions } from "./cli";
 
 export const checkOptions = ({ format, output }: BundlerCliOptions) => {
   if (format !== undefined) {

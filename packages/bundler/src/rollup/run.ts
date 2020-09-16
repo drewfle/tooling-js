@@ -1,11 +1,11 @@
 import { calcInputOptions } from "./calc-input-options";
 import { calcOutputOptions } from "./calc-output-options";
 import { checkOptions, readLocalRollupConfig } from "../utils";
-import { BundlerCliOptions } from "../types";
+import { BundlerCliOptions } from "../cli";
 import { build } from "./build";
 import { watch } from "./watch";
 
-export async function run(cliOptions: BundlerCliOptions) {
+export default async function run(cliOptions: BundlerCliOptions) {
   checkOptions(cliOptions);
 
   const localOptions = readLocalRollupConfig();

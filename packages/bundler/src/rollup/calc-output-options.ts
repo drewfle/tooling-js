@@ -2,7 +2,7 @@ import { RollupOptions, OutputOptions, ModuleFormat, Plugin } from "rollup";
 import { terser as terserPlugin } from "rollup-plugin-terser";
 const html = require("@rollup/plugin-html");
 import path from "path";
-import { BundlerCliOptions } from "../types";
+import { BundlerCliOptions } from "../cli";
 
 export interface OutputOptionsDefault extends OutputOptions {
   format: ModuleFormat;
