@@ -1,6 +1,6 @@
 import command from "commander";
 
-export const cli = (bundler: command.Command) => {
+export default function cli(bundler: command.Command) {
   bundler
     .command("rollup")
     .option(
@@ -19,6 +19,7 @@ export const cli = (bundler: command.Command) => {
     .option("--dist <path>", "Dist file path", "dist/bundle.js")
     .option("--watch", "Enable watch mode", false)
     .option("--serve", "Enable server", false)
+    .option("-p, --port <port>", "Specify dev server port", "8080")
     .option("-b, --babel", "Enable babel", false)
     .option(
       "-e, --external",
@@ -27,4 +28,4 @@ export const cli = (bundler: command.Command) => {
     )
     .option("-s, --source-map", "Enable source map", false)
     .option("-t, --terser", "Enable terser", false);
-};
+}

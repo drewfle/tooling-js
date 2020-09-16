@@ -12,7 +12,7 @@ const baseTsConfig = require("@drewfle/config/typescript/tsconfig-base.json");
 const basePostCssConfig = require("@drewfle/config/postcss/postcss.config-base.js");
 const baseBabelConfig = require("@drewfle/config/babel/babel.config-base.js");
 
-import { BundlerCliOptions } from "../types";
+import { BundlerCliOptions } from "../cli";
 import {
   patchBabelConfigModulePaths,
   readLocalPackageJson,
@@ -89,7 +89,7 @@ function configureInputOptions(
 ) {
   const pkg = readLocalPackageJson();
   const configuredOptions = optionsToBeConfigured;
-  const { dist, output, src, serve, babel, external } = cliOptions;
+  const { dist, output, src, serve, port, babel, external } = cliOptions;
 
   configuredOptions.input = src;
   if (output === "browser" || babel) {
@@ -117,7 +117,7 @@ function configureInputOptions(
         open: false,
         contentBase,
         host,
-        port: 10001,
+        port,
       }),
       livereload("dist"),
     ];

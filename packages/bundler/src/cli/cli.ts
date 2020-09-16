@@ -1,6 +1,21 @@
-import { Command } from "commander";
-import { BundlerCliOptions } from "../types";
+import commander, { Command } from "commander";
+import { InternalModuleFormat } from "rollup";
+
 import * as rollup from "../rollup";
+
+export interface BundlerCliOptions extends commander.Command {
+  output: "lib-es" | "lib-cjs" | "browser";
+  format?: InternalModuleFormat;
+  src: string;
+  dist: string;
+  watch: boolean;
+  serve: boolean;
+  port: string;
+  babel: boolean;
+  external: boolean;
+  sourceMap: boolean;
+  terser: boolean;
+}
 
 export const bundler = () => {
   const bundler = new Command();
