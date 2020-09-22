@@ -42,6 +42,7 @@ export const readLocalRollupConfig = (): RollupOptions | undefined => {
 
 type BabelOption = string | any[];
 type BabelConfig = {
+  env?: any;
   presets?: BabelOption[];
   plugins?: BabelOption[];
 };

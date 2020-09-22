@@ -11,7 +11,7 @@ export interface BundlerCliOptions extends commander.Command {
   watch: boolean;
   serve: boolean;
   port: string;
-  babel: boolean;
+  babel?: "node" | "browser";
   external: boolean;
   sourceMap: boolean;
   terser: boolean;

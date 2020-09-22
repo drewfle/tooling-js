@@ -7,10 +7,12 @@ import path from "path";
 const postcss = require("rollup-plugin-postcss");
 const servePlugin = require("rollup-plugin-serve");
 const livereload = require("rollup-plugin-livereload");
-const { getBabelOutputPlugin } = require("@rollup/plugin-babel");
+// @ts-ignore
+import babelPlugin from "@rollup/plugin-babel";
 const baseTsConfig = require("@drewfle/config/typescript/tsconfig-base.json");
 const basePostCssConfig = require("@drewfle/config/postcss/postcss.config-base.js");
-const baseBabelConfig = require("@drewfle/config/babel/babel.config-base.js");
+const babelConfigBrowser = require("@drewfle/config/babel/babel.config-browser.js");
+const babelConfigNode = require("@drewfle/config/babel/babel.config-node.js");
 
 import { BundlerCliOptions } from "../cli";
 import {
@@ -89,15 +91,35 @@ function configureInputOptions(
 ) {
   const pkg = readLocalPackageJson();
   const configuredOptions = optionsToBeConfigured;
-  const { dist, output, src, serve, port, babel, external } = cliOptions;
+  const {
+    dist,
+    output,
+    src,
+    serve,
+    port,
+    terser,
+    babel,
+    external,
+  } = cliOptions;
 
   configuredOptions.input = src;
   if (output === "browser" || babel) {
-    const patchedBabelConfig = patchBabelConfigModulePaths(baseBabelConfig);
+    const babelConfigs = {
+      browser: babelConfigBrowser,
+      node: babelConfigNode,
+    } as const;
+    const babelConfig =
+      output === "browser" ? babelConfigBrowser : babelConfigs[babel!];
+    const patchedBabelConfig = patchBabelConfigModulePaths(babelConfig);
+
+    if (!terser) {
+      patchedBabelConfig.env = { development: { compact: false } };
+    }
+
     configuredOptions.plugins = [
       ...configuredOptions.plugins,
-      getBabelOutputPlugin({
-        allowAllFormats: true,
+      babelPlugin({
+        babelHelpers: output === "browser" ? "bundled" : "runtime",
         ...patchedBabelConfig,
       }),
     ];

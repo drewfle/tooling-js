@@ -8,7 +8,7 @@ export default function cli(bundler: command.Command) {
       `Build output. Available values are lib-es, lib-cjs, and browser.
   lib-es: equivalent to passing -f es -es.
   lib-cjs: equivalent to passing -f cjs -es.
-  browser: equivalent to passing -f iife -sb.`,
+  browser: equivalent to passing -f iife -s -b browser.`,
       "lib-es"
     )
     .option(
@@ -20,7 +20,10 @@ export default function cli(bundler: command.Command) {
     .option("--watch", "Enable watch mode", false)
     .option("--serve", "Enable server", false)
     .option("-p, --port <port>", "Specify dev server port", "8080")
-    .option("-b, --babel", "Enable babel", false)
+    .option(
+      "-b, --babel <mode>",
+      "Enable babel. Available options are node and browser"
+    )
     .option(
       "-e, --external",
       "Enable external to exclude specified dependencies. By default it excludes all dependencies.",
