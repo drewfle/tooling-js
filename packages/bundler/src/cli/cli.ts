@@ -20,7 +20,7 @@ export interface BundlerCliOptions extends commander.Command {
 export const bundler = () => {
   const bundler = new Command();
   bundler.description(
-    "Drewfle Bundler is a CLI tool for building and bundling packages. It laverages Rollup API and abstract away common dev dependencies."
+    "Drewfle Bundler laverages Rollup API and abstract away common dev dependencies."
   );
   rollup.cli(bundler);
 

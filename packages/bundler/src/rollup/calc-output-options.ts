@@ -2,6 +2,7 @@ import { RollupOptions, OutputOptions, ModuleFormat, Plugin } from "rollup";
 import { terser as terserPlugin } from "rollup-plugin-terser";
 const html = require("@rollup/plugin-html");
 import path from "path";
+import fs from "fs";
 import { BundlerCliOptions } from "../cli";
 
 export interface OutputOptionsDefault extends OutputOptions {
@@ -73,7 +74,13 @@ function configureOutputOptions(
       output === "browser" ||
       (format && ["iife", "es", "umd"].includes(format))
     ) {
-      const bundleFilename = path.basename(dist);
+      const bundleJsFilename = path.basename(dist);
+      const bundleCssPath = dist.replace(/\.js$/, ".css");
+      const bundleCssFilename = path.basename(bundleCssPath);
+      const link = fs.existsSync(bundleCssPath)
+        ? `<link href="${bundleCssFilename}" rel="stylesheet">`
+        : "";
+      const script = `<script src="${bundleJsFilename}"></script>`;
       configuredOptions.plugins.push(
         html({
           template: () => `
@@ -82,10 +89,11 @@ function configureOutputOptions(
   <head>
     <meta charset="utf-8" />
     <title>Rollup Bundle</title>
+    ${link}
   </head>
   <body>
     <div id="root"></div>
-    <script src="${bundleFilename}"></script>
+    ${script}
   </body>
 </html>
 `,
