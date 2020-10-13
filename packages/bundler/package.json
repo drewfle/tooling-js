@@ -2,6 +2,7 @@
   "name": "@drewfle/bundler",
   "version": "1.0.0",
   "description": "",
+  "author": "Andrew Liu <andrewliustudio@gmail.com>",
   "bin": {
     "drewfle-bundler": "cli.js"
   },
@@ -15,13 +16,6 @@
     "start": "rollup -c -w",
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Andrew Liu <andrewliustudio@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/drewfle/tooling.git"
   },
   "dependencies": {
     "@babel/core": "7.10.4",
@@ -50,5 +44,14 @@
     "@babel/cli": "7.10.4",
     "@drewfle/config": "*",
     "typescript": "3.9.6"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drewfle/tooling.git"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
