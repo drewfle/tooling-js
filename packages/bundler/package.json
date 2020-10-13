@@ -1,6 +1,6 @@
 {
   "name": "@drewfle/bundler",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "bin": {
     "drewfle-bundler": "cli.js"
@@ -28,7 +28,7 @@
     "@babel/plugin-proposal-object-rest-spread": "7.11.0",
     "@babel/preset-env": "7.11.0",
     "@babel/preset-react": "7.10.4",
-    "@drewfle/config": "^0.1.1",
+    "@drewfle/config": "^0.1.2",
     "@rollup/plugin-babel": "5.0.4",
     "@rollup/plugin-commonjs": "13.0.0",
     "@rollup/plugin-html": "0.2.0",
