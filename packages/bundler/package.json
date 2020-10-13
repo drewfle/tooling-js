@@ -14,7 +14,8 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "prepublish": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "init": "jest --init",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Andrew Liu <andrewliustudio@gmail.com>",
@@ -45,6 +46,12 @@
     "rollup-plugin-typescript2": "0.27.1",
     "typescript-plugin-css-modules": "2.3.0",
     "typescript": "3.9.6"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "7.10.4",
+    "@types/jest": "26.0.14",
+    "babel-jest": "26.5.2",
+    "jest": "26.5.2"
   },
   "peerDependencies": {
     "@babel/cli": "7.10.4",
