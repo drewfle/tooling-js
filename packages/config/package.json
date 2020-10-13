@@ -1,6 +1,6 @@
 {
   "name": "@drewfle/config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "author": "Andrew Liu <andrewliustudio@gmail.com>",
   "scripts": {
@@ -9,9 +9,9 @@
   "dependencies": {
     "postcss-import": "12.0.1",
     "postcss-mixins": "6.2.3",
+    "postcss-modules": "3.1.0",
     "postcss-nested": "4.2.1",
-    "postcss-preset-env": "6.7.0",
-    "postcss-modules": "3.1.0"
+    "postcss-preset-env": "6.7.0"
   },
   "homepage": "https://github.com/drewfle/tooling#readme",
   "license": "MIT",
