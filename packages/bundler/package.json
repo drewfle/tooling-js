@@ -50,5 +50,6 @@
     "@babel/cli": "7.10.4",
     "@drewfle/config": "*",
     "typescript": "3.9.6"
-  }
+  },
+  "gitHead": "640814e65c17230da25864f899ad652dfdd34218"
 }
