@@ -1,54 +1,17 @@
 # @drewfle/bundler
 
-Drewfle Bundler is a CLI tool for building and bundling packages that laverages Rollup API and abstract away common dev dependencies. bundler offers:
+![](files/bundler-watch.gif)
 
-1. Outof box Typescript and PostCSS support for building libraries and web apps.
-1. Options for Babel and Terser support for bundling web apps.
+Drewfle Bundler is a building and bundling tool for Typescript. It leverages Rollup API and abstracts away common dependencies. It offers out of box Typescript support for building libraries. It also supports bundling front end web apps with PostCSS and additional Babel options.
 
-## Usages
-
-### React Project
-
-```json
-  "scripts": {
-    "build": "drewfle-bundler rollup --src src/index.tsx --dist dist/bundle.js -o browser",
-    "watch": "drewfle-bundler rollup --src src/index.tsx --dist dist/bundle.js -o browser --watch --serve",
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  },
-  "devDependencies": {
-    "@drewfle/bundler": "file:../../github/tooling/packages/bundler",
-    "@drewfle/config": "file:../../github/tooling/packages/config",
-    "@types/react": "16.8.24",
-    "@types/react-dom": "16.9.8",
-    "typescript": "3.9.6"
-  }
-```
+Under the hood Drewfle Bundler uses [rollup-plugin-typescript2](https://www.npmjs.com/package/rollup-plugin-typescript2). In the future it'll add options to load a much faster compiler and bundle web apps without Babel.
 
 ## Options
 
 ```
-$ drewfle-bundler -h
+$ drewfle-bundler rollup -h
 
-Usage: drewfle-bundler [options] [command]
-
-Drewfle Bundler is a CLI tool for building and bundling packages. It laverages Rollup API and abstract away common dev dependencies.
-
-Options:
-  -h, --help        display help for command
-
-Commands:
-  rollup [options]
-  help [command]    display help for command
-
-> drewfle-bundler rollup -h
-
-Usage: drewfle-bundler rollup [options]
+Usage: cli rollup [options]
 
 Options:
   -o, --output <type>  Build output. Available values are lib-es, lib-cjs, and browser.
@@ -66,4 +29,54 @@ Options:
   -s, --source-map     Enable source map (default: false)
   -t, --terser         Enable terser (default: false)
   -h, --help           display help for command
+```
+
+### Minimal React Project Setup
+
+It needs at least:
+
+```sh
+src/ # source folder and entry file names are customizable
+  index.tsx
+package.json
+tsconfig.json
+```
+
+Outputs like:
+
+```sh
+dist/ # output folder and bundle names are customizable
+  types/
+  bundle.css
+  bundle.js
+  bundle.js.map
+  index.html
+```
+
+#### Sample `package.json`
+
+```json
+  "scripts": {
+    "build": "drewfle-bundler rollup --src src/index.tsx --dist dist/bundle.js -o browser",
+    "watch": "drewfle-bundler rollup --src src/index.tsx --dist dist/bundle.js -o browser --watch --serve",
+  },
+  "dependencies": {
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@drewfle/bundler": "^1.0.0",
+    "@drewfle/config": "^0.1.0",
+    "@types/react": "16.8.24",
+    "@types/react-dom": "16.9.8",
+    "typescript": "3.9.6"
+  }
+```
+
+#### `tsconfig.json`
+
+```json
+{
+  "extends": "@drewfle/config/typescript/tsconfig-base.json"
+}
 ```
