@@ -1,6 +1,6 @@
 # @drewfle/bundler
 
-![](files/bundler-watch.gif)
+![](https://raw.githubusercontent.com/drewfle/tooling/master/packages/bundler/files/bundler-watch.gif)
 
 Drewfle Bundler is a building and bundling tool for Typescript. It leverages Rollup API and abstracts away common dependencies. It offers out of box Typescript support for building libraries. It also supports bundling front end web apps with PostCSS and additional Babel options.
 
