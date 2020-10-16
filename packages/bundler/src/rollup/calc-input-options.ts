@@ -66,9 +66,9 @@ export function calcInputOptions(
       ...baseCompilerOptions,
       declarationDir: path.join(distDir, "types"),
     },
-    ...restBaseTsConfig,
     include: [`${srcDir}/**/*`],
     exclude: ["node_modules", distDir],
+    ...restBaseTsConfig,
   };
 
   const inputOptionsDefault = getInputOptionsDefault(tsconfig);
