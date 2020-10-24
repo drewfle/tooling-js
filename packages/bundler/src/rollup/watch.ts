@@ -1,7 +1,7 @@
 import { RollupWatcherEvent, RollupError, watch as rollupWatch } from "rollup";
 import chalk from "chalk";
-import { InputOptionsDefault } from "./calc-input-options";
-import { OutputOptionsDefault } from "./calc-output-options";
+import { InputOptionsDefault } from "./calc-input-options/calc-input-options";
+import { OutputOptionsDefault } from "./calc-output-options/calc-output-options";
 const path = require("path");
 
 export const watch = (

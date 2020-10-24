@@ -3,7 +3,7 @@ import { terser as terserPlugin } from "rollup-plugin-terser";
 const html = require("@rollup/plugin-html");
 import path from "path";
 import fs from "fs";
-import { BundlerCliOptions } from "../cli";
+import { BundlerCliOptions } from "../../cli";
 
 export interface OutputOptionsDefault extends OutputOptions {
   format: ModuleFormat;
@@ -31,7 +31,7 @@ export const calcOutputOptionsDefault = ({
   };
 };
 
-export function calcOutputOptions(
+export default function calcOutputOptions(
   cliOptions: BundlerCliOptions,
   localOptons: RollupOptions | undefined
 ) {

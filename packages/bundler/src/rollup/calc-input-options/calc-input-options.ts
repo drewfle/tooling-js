@@ -14,12 +14,12 @@ const basePostCssConfig = require("@drewfle/config/postcss/postcss.config-base.j
 const babelConfigBrowser = require("@drewfle/config/babel/babel.config-browser.js");
 const babelConfigNode = require("@drewfle/config/babel/babel.config-node.js");
 
-import { BundlerCliOptions } from "../cli";
+import { BundlerCliOptions } from "../../cli";
 import {
   patchBabelConfigModulePaths,
   readLocalPackageJson,
   getLocalIp,
-} from "../utils";
+} from "../../utils";
 
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
@@ -50,7 +50,7 @@ export const getInputOptionsDefault = (tsconfig: any): InputOptionsDefault => ({
   ],
 });
 
-export function calcInputOptions(
+export default function calcInputOptions(
   cliOptions: BundlerCliOptions,
   localConfigPlugins?: Plugin[],
   localConfigWithoutPlugins?: Omit<InputOptions, "plugins" | "output">
