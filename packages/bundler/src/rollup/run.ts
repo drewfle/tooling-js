@@ -1,5 +1,5 @@
-import { calcInputOptions } from "./calc-input-options";
-import { calcOutputOptions } from "./calc-output-options";
+import { calcInputOptions } from "./calcInputOptions";
+import { calcOutputOptions } from "./calcOutputOptions";
 import { checkOptions, readLocalRollupConfig } from "../utils";
 import { BundlerCliOptions } from "../cli";
 import { build } from "./build";

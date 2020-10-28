@@ -1,55 +1,12 @@
-import { RollupOptions, OutputOptions, ModuleFormat, Plugin } from "rollup";
 import { terser as terserPlugin } from "rollup-plugin-terser";
 const html = require("@rollup/plugin-html");
 import path from "path";
 import fs from "fs";
 import { BundlerCliOptions } from "../../cli";
+import { OutputOptionsDefault } from "./types";
+import { outputFormatMap } from "./constants";
 
-export interface OutputOptionsDefault extends OutputOptions {
-  format: ModuleFormat;
-  plugins: Plugin[];
-}
-
-const outputFormatMap = {
-  "lib-es": "es",
-  "lib-cjs": "cjs",
-  browser: "iife",
-} as const;
-
-export const calcOutputOptionsDefault = ({
-  output,
-  format,
-  dist,
-}: BundlerCliOptions): OutputOptionsDefault => {
-  const extension = format ? format : outputFormatMap[output];
-  const file = dist;
-
-  return {
-    file,
-    format: extension!,
-    plugins: [],
-  };
-};
-
-export default function calcOutputOptions(
-  cliOptions: BundlerCliOptions,
-  localOptons: RollupOptions | undefined
-) {
-  const outputOptionsDefault = calcOutputOptionsDefault(cliOptions);
-  let calculatedOptions = configureOutputOptions(
-    outputOptionsDefault,
-    cliOptions
-  );
-  // Merge local at last to override existing config
-  calculatedOptions = mergeWithLocalOutputConfig(
-    calculatedOptions,
-    localOptons
-  );
-
-  return calculatedOptions;
-}
-
-function configureOutputOptions(
+export default function configureOutputOptions(
   optionsToBeConfigured: OutputOptionsDefault,
   cliOptions: BundlerCliOptions
 ) {
@@ -61,7 +18,7 @@ function configureOutputOptions(
     configuredOptions.format = outputFormatMap[output];
   }
   if (output === "browser" || format === "iife") {
-    configuredOptions.name = "tsroll";
+    configuredOptions.name = "whatever";
   }
   if (sourceMap) {
     configuredOptions.sourcemap = true;
@@ -103,15 +60,4 @@ function configureOutputOptions(
   }
 
   return configuredOptions;
-}
-
-function mergeWithLocalOutputConfig(
-  optionsToBeMerged: OutputOptionsDefault,
-  localConfigOutput: OutputOptions | undefined
-) {
-  if (!localConfigOutput) {
-    return optionsToBeMerged;
-  }
-  const mergedOptions = { ...optionsToBeMerged, ...localConfigOutput };
-  return mergedOptions;
 }
