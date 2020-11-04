@@ -4,6 +4,11 @@ export default function cli(bundler: command.Command) {
   bundler
     .command("rollup")
     .option(
+      "-c, --compiler <type>",
+      `Compiler. Available values are rtp2 and esbuild. rtp2 stands for rollup-plugin-typescript2`,
+      "rtp2"
+    )
+    .option(
       "-o, --output <type>",
       `Build output. Available values are lib-es, lib-cjs, and browser.
   lib-es: equivalent to passing -f es -es.

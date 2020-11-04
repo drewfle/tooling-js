@@ -29,7 +29,7 @@ export default function calcInputOptions(
     ...restBaseTsConfig,
   };
 
-  const inputOptionsDefault = getInputOptionsDefault(tsconfig);
+  const inputOptionsDefault = getInputOptionsDefault(cliOptions, tsconfig);
   let calculatedOptions = configureInputOptions(
     inputOptionsDefault,
     cliOptions
