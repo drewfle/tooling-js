@@ -14,6 +14,7 @@ $ drewfle-bundler rollup -h
 Usage: cli rollup [options]
 
 Options:
+  -c, --compiler <type>  Compiler. Available values are rtp2 and esbuild. rtp2 stands for rollup-plugin-typescript2 (default: "rtp2")
   -o, --output <type>  Build output. Available values are lib-es, lib-cjs, and browser.
     lib-es: equivalent to passing -f es -es.
     lib-cjs: equivalent to passing -f cjs -es.

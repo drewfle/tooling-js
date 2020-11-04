@@ -1,7 +1,7 @@
 import { terser as terserPlugin } from "rollup-plugin-terser";
-const html = require("@rollup/plugin-html");
 import path from "path";
 import fs from "fs";
+const html = require("@rollup/plugin-html");
 import { BundlerCliOptions } from "../../cli";
 import { OutputOptionsDefault } from "./types";
 import { outputFormatMap } from "./constants";

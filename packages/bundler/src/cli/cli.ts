@@ -4,6 +4,7 @@ import { InternalModuleFormat } from "rollup";
 import * as rollup from "../rollup";
 
 export interface BundlerCliOptions extends commander.Command {
+  compiler: 'rtp2' | 'esbuild';
   output: "lib-es" | "lib-cjs" | "browser";
   format?: InternalModuleFormat;
   src: string;
