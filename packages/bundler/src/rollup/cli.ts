@@ -5,7 +5,9 @@ export default function cli(bundler: command.Command) {
     .command("rollup")
     .option(
       "-c, --compiler <type>",
-      `Compiler. Available values are rtp2 and esbuild. rtp2 stands for rollup-plugin-typescript2`,
+      `Compiler. Available values are rtp2 and esbuild.
+rtp2: stands for rollup-plugin-typescript2.
+esbuild: when enabled, disables babel.`,
       "rtp2"
     )
     .option(
@@ -13,7 +15,7 @@ export default function cli(bundler: command.Command) {
       `Build output. Available values are lib-es, lib-cjs, and browser.
   lib-es: equivalent to passing -f es -es.
   lib-cjs: equivalent to passing -f cjs -es.
-  browser: equivalent to passing -f iife -s -b browser.`,
+  browser: equivalent to passing -f iife -s -b browser. By default uses babel to output cross-browser compatible code. Uses esbuild when compiler is set to esbuild.`,
       "lib-es"
     )
     .option(
@@ -27,7 +29,7 @@ export default function cli(bundler: command.Command) {
     .option("-p, --port <port>", "Specify dev server port", "8080")
     .option(
       "-b, --babel <mode>",
-      "Enable babel. Available options are node and browser"
+      "Enable babel. Available options are node and browser. Ignored when compiler is set to esbuild."
     )
     .option(
       "-e, --external",
