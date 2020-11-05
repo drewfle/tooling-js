@@ -20,6 +20,7 @@ export default function configureInputOptions(
   const pkg = readLocalPackageJson();
   const configuredOptions = optionsToBeConfigured;
   const {
+    compiler,
     dist,
     output,
     src,
@@ -31,7 +32,7 @@ export default function configureInputOptions(
   } = cliOptions;
 
   configuredOptions.input = src;
-  if (output === "browser" || babel) {
+  if ((compiler === "rtp2" && output === "browser") || babel) {
     const babelConfigs = {
       browser: babelConfigBrowser,
       node: babelConfigNode,
