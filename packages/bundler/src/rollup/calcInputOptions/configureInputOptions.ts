@@ -1,10 +1,11 @@
 import path from "path";
-const servePlugin = require("rollup-plugin-serve");
-const livereload = require("rollup-plugin-livereload");
 // @ts-ignore
 import babelPlugin from "@rollup/plugin-babel";
+const servePlugin = require("rollup-plugin-serve");
+const livereload = require("rollup-plugin-livereload");
 const babelConfigBrowser = require("@drewfle/config/babel/babel.config-browser.js");
 const babelConfigNode = require("@drewfle/config/babel/babel.config-node.js");
+import { url } from "./plugins";
 import { BundlerCliOptions } from "../../cli";
 import {
   patchBabelConfigModulePaths,
@@ -73,6 +74,12 @@ export default function configureInputOptions(
       livereload("dist"),
     ];
   }
+
+  // TODO: use Set.add(..), Set.delete(undefined), and [...set]
+  configuredOptions.plugins = [
+    ...configuredOptions.plugins,
+    url(cliOptions),
+  ].filter((v) => v);
 
   return configuredOptions;
 }
