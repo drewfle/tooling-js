@@ -37,5 +37,9 @@ esbuild: when enabled, disables babel.`,
       false
     )
     .option("-s, --source-map", "Enable source map", false)
-    .option("-t, --terser", "Enable terser", false);
+    .option("-t, --terser", "Enable terser", false)
+    .option(
+      "--init <type>",
+      `Initialize minimal project files. Available options is ts-react`
+    );
 }

@@ -1,8 +1,9 @@
 import path from "path";
-import fs from "fs";
-import { RollupOptions } from "rollup";
+import fs from "fs-extra";
 import os from "os";
+import { RollupOptions } from "rollup";
 import { BundlerCliOptions } from "./cli";
+import { TemplateDirName } from "./cli";
 
 export const checkOptions = ({ format, output }: BundlerCliOptions) => {
   if (format !== undefined) {
@@ -47,13 +48,12 @@ type BabelConfig = {
   plugins?: BabelOption[];
 };
 export function patchBabelConfigModulePaths(babelConfig: BabelConfig) {
-  const modulePath = "./node_modules/@drewfle/bundler/node_modules";
   const result: BabelConfig = {};
   const patch = (options: BabelOption[]) =>
     options.map((option) =>
       Array.isArray(option)
-        ? [`${modulePath}/${option[0]}`, option[1]]
-        : `${modulePath}/${option}`
+        ? [require.resolve(option[0]), option[1]]
+        : require.resolve(option)
     );
   if (babelConfig.presets) {
     result.presets = patch(babelConfig.presets);
@@ -80,4 +80,13 @@ export function getLocalIp() {
     );
 
   return localIp;
+}
+
+export function copyTemplate(templateDirName: TemplateDirName) {
+  const templatePath = path.dirname(require.resolve("@drewfle/templates"));
+  const src = path.join(templatePath, "bundler/rollup", templateDirName);
+  fs.copySync(src, ".");
+  console.log(
+    "Initialized drewfle bundler boilerplate, please install dependencies, e.g. run `npm i`"
+  );
 }

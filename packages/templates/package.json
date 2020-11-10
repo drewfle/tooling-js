@@ -1,0 +1,27 @@
+{
+  "name": "@drewfle/templates",
+  "version": "1.0.1",
+  "description": "",
+  "author": "Andrew Liu <andrewliustudio@gmail.com>",
+  "homepage": "https://github.com/drewfle/tooling#readme",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "bundler"
+  ],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drewfle/tooling.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/drewfle/tooling/issues"
+  },
+  "gitHead": "7206b4e264cf650792cdc1cab13ef07c71317097"
+}

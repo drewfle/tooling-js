@@ -31,6 +31,7 @@ Options:
   -e, --external         Enable external to exclude specified dependencies. By default it excludes all dependencies. (default: false)
   -s, --source-map       Enable source map (default: false)
   -t, --terser           Enable terser (default: false)
+  --init <type>          Initialize minimal project files. Available option is ts-react
   -h, --help             display help for command
 ```
 
@@ -83,3 +84,7 @@ dist/ # output folder and bundle names are customizable
   "extends": "@drewfle/config/typescript/tsconfig-base.json"
 }
 ```
+
+## Development
+
+Test run initializing project, in an empty folder, run `npx <path-to>/tooling/packages/bundler/cli.js rollup --init ts-react`

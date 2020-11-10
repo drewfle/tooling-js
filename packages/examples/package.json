@@ -9,6 +9,7 @@
     "watch:ts-react": "drewfle-bundler rollup --src src-ts-react/index.tsx --dist dist-ts-react/bundle.js -o browser --watch --serve",
     "build:ts-react:esbuild": "drewfle-bundler rollup --src src-ts-react/index.tsx --dist dist-ts-react/bundle.js -o browser -c esbuild",
     "watch:ts-react:esbuild": "drewfle-bundler rollup --src src-ts-react/index.tsx --dist dist-ts-react/bundle.js -o browser --watch --serve -c esbuild",
+    "init:ts-react": "drewfle-bundler rollup --init ts-react",
     "tmp": "drewfle-bundler -h",
     "tmp2": "drewfle-bundler rollup -h",
     "test": "echo \"Error: no test specified\" && exit 1"
