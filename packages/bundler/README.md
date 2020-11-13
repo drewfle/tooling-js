@@ -37,7 +37,7 @@ Options:
 
 ### Minimal React Project Setup
 
-See [example React project](https://github.com/drewfle/tooling/tree/master/packages/templates/bundler/rollup/ts-react). Or in an empty folder, run `npx @drewfle/bundler rollup --init ts-react`
+See [example React project](https://github.com/drewfle/tooling/tree/master/packages/templates/bundler/rollup/ts-react). Or in an empty folder, run `npx @drewfle`/bundler rollup --init ts-react`
 
 ## Development
 
