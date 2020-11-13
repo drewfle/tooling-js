@@ -37,7 +37,12 @@ Options:
 
 ### Minimal React Project Setup
 
-See [example React project](https://github.com/drewfle/tooling/tree/master/packages/templates/bundler/rollup/ts-react). Or in an empty folder, run `npx @drewfle`/bundler rollup --init ts-react`
+See [example React project](https://github.com/drewfle/tooling/tree/master/packages/templates/bundler/rollup/ts-react). Or in an empty folder:
+
+- Run `npx @drewfle/bundler rollup --init ts-react`
+- Install dependencies, e.g. run `npm i`
+- Run `npm start`
+- In a browser, load the build at default port 8080.
 
 ## Development
 
