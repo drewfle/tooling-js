@@ -1,10 +1,11 @@
 import commander, { Command } from "commander";
 import { InternalModuleFormat } from "rollup";
-
 import * as rollup from "../rollup";
 
+export type TemplateDirName = "ts-react" | "ts-node";
+
 export interface BundlerCliOptions extends commander.Command {
-  compiler: 'rtp2' | 'esbuild';
+  compiler: "rtp2" | "esbuild";
   output: "lib-es" | "lib-cjs" | "browser";
   format?: InternalModuleFormat;
   src: string;
@@ -16,6 +17,7 @@ export interface BundlerCliOptions extends commander.Command {
   external: boolean;
   sourceMap: boolean;
   terser: boolean;
+  init?: TemplateDirName;
 }
 
 export const bundler = () => {

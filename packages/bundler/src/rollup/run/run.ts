@@ -1,12 +1,21 @@
-import { calcInputOptions } from "./calcInputOptions";
-import { calcOutputOptions } from "./calcOutputOptions";
-import { checkOptions, readLocalRollupConfig } from "../utils";
-import { BundlerCliOptions } from "../cli";
-import { build } from "./build";
+import { calcInputOptions } from "../calcInputOptions";
+import { calcOutputOptions } from "../calcOutputOptions";
+import { checkOptions, readLocalRollupConfig, copyTemplate } from "../../utils";
+import { BundlerCliOptions } from "../../cli";
 import { watch } from "./watch";
+import { build } from "./build";
 
 export default async function run(cliOptions: BundlerCliOptions) {
   checkOptions(cliOptions);
+
+  if (cliOptions.init === "ts-react") {
+    console.log("Initializing ts-react boilerplate ...");
+    copyTemplate("ts-react");
+    return;
+  } else if (cliOptions.init === "ts-node") {
+    console.log("ts-node boilerplate is not supported yet. Abort.");
+    return;
+  }
 
   const localOptions = readLocalRollupConfig();
   const {
@@ -28,9 +37,9 @@ export default async function run(cliOptions: BundlerCliOptions) {
   );
   const outputOptions = calcOutputOptions(cliOptions, localConfigOutput);
 
-  if (!cliOptions.watch) {
-    await build(inputOptions, outputOptions);
-  } else {
+  if (cliOptions.watch) {
     watch(inputOptions, outputOptions);
+  } else {
+    await build(inputOptions, outputOptions);
   }
 }

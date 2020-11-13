@@ -1,6 +1,6 @@
 import { rollup } from "rollup";
-import { InputOptionsDefault } from "./calcInputOptions/types";
-import { OutputOptionsDefault } from "./calcOutputOptions/types";
+import { InputOptionsDefault } from "../calcInputOptions/types";
+import { OutputOptionsDefault } from "../calcOutputOptions/types";
 
 export async function build(
   inputOptions: InputOptionsDefault,
