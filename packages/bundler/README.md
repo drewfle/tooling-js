@@ -37,53 +37,7 @@ Options:
 
 ### Minimal React Project Setup
 
-It needs at least:
-
-```sh
-src/ # source folder and entry file names are customizable
-  index.tsx
-package.json
-tsconfig.json
-```
-
-Outputs like:
-
-```sh
-dist/ # output folder and bundle names are customizable
-  types/
-  bundle.css
-  bundle.js
-  bundle.js.map
-  index.html
-```
-
-#### Sample `package.json`
-
-```json
-  "scripts": {
-    "build": "drewfle-bundler rollup --src src/index.tsx --dist dist/bundle.js -o browser",
-    "watch": "drewfle-bundler rollup --src src/index.tsx --dist dist/bundle.js -o browser --watch --serve",
-  },
-  "dependencies": {
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  },
-  "devDependencies": {
-    "@drewfle/bundler": "^1.0.0",
-    "@drewfle/config": "^0.1.0",
-    "@types/react": "16.8.24",
-    "@types/react-dom": "16.9.8",
-    "typescript": "3.9.6"
-  }
-```
-
-#### `tsconfig.json`
-
-```json
-{
-  "extends": "@drewfle/config/typescript/tsconfig-base.json"
-}
-```
+See [example React project](https://github.com/drewfle/tooling/tree/master/packages/templates/bundler/rollup/ts-react). Or in an empty folder, run `npx @drewfle/bundler rollup --init ts-react`
 
 ## Development
 
