@@ -2,7 +2,7 @@
   "name": "@drewfle/examples",
   "private": true,
   "description": "",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "scripts": {
     "build:ts-node": "drewfle-bundler rollup --src src-ts-node/index.ts --dist dist-ts-node/bundle.js",
     "build:ts-react": "drewfle-bundler rollup --src src-ts-react/index.tsx --dist dist-ts-react/bundle.js -o browser",
@@ -19,7 +19,7 @@
     "react-dom": "16.13.1"
   },
   "devDependencies": {
-    "@drewfle/bundler": "^1.4.1",
+    "@drewfle/bundler": "^1.4.2",
     "@drewfle/config": "^0.1.5",
     "@types/react": "16.8.24",
     "@types/react-dom": "16.9.8",
