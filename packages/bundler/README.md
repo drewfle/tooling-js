@@ -39,12 +39,15 @@ Options:
 
 See [example React project](https://github.com/drewfle/tooling/tree/master/packages/templates/bundler/rollup/ts-react). Or in an empty folder:
 
-- Use Node 12. See notes below.
-- Run `npx @drewfle/bundler rollup --init ts-react`
-  - If npx picks up Ruby bundler, run `npx -p @drewfle/bundler drewfle-bundler rollup --init ts-react`
-- Install dependencies, e.g. run `npm i`
-- Run `npm start`
-- In a browser, load the build at default port 8080.
+Use Node 12. See notes below. Run:
+
+```sh
+mkdir reactapp
+cd reactapp
+npx -p @drewfle/bundler drewfle-bundler rollup --init ts-react
+npm i
+npm start
+```
 
 Note: Node 13 doesn't work with `@rollup\pluginutils` as a dependency, this relates to [this issue](https://github.com/preactjs/preact-cli/issues/1277).
 
