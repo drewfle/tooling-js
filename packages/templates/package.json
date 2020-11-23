@@ -12,7 +12,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/drewfle/tooling.git"
+    "url": "git+https://github.com/drewfle/tooling-js.git"
   },
   "publishConfig": {
     "access": "public"

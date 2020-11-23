@@ -58,7 +58,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/drewfle/tooling.git"
+    "url": "https://github.com/drewfle/tooling-js.git"
   },
   "publishConfig": {
     "access": "public"
