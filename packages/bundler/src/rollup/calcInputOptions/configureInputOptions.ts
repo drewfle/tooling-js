@@ -7,11 +7,7 @@ const babelConfigBrowser = require("@drewfle/config/babel/babel.config-browser.j
 const babelConfigNode = require("@drewfle/config/babel/babel.config-node.js");
 import { url } from "./plugins";
 import { BundlerCliOptions } from "../../cli";
-import {
-  patchBabelConfigModulePaths,
-  readLocalPackageJson,
-  getLocalIp,
-} from "../../utils";
+import { readLocalPackageJson, getLocalIp } from "../../utils";
 import { InputOptionsDefault } from "./types";
 
 export default function configureInputOptions(
@@ -40,17 +36,16 @@ export default function configureInputOptions(
     } as const;
     const babelConfig =
       output === "browser" ? babelConfigBrowser : babelConfigs[babel!];
-    const patchedBabelConfig = patchBabelConfigModulePaths(babelConfig);
 
     if (!terser) {
-      patchedBabelConfig.env = { development: { compact: false } };
+      babelConfig.env = { development: { compact: false } };
     }
 
     configuredOptions.plugins = [
       ...configuredOptions.plugins,
       babelPlugin({
         babelHelpers: output === "browser" ? "bundled" : "runtime",
-        ...patchedBabelConfig,
+        ...babelConfig,
       }),
     ];
   }

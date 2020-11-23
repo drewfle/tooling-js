@@ -47,6 +47,9 @@ type BabelConfig = {
   presets?: BabelOption[];
   plugins?: BabelOption[];
 };
+/**
+ * Use this for reading local config.
+ */
 export function patchBabelConfigModulePaths(babelConfig: BabelConfig) {
   const result: BabelConfig = {};
   const patch = (options: BabelOption[]) =>

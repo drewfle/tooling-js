@@ -1,14 +1,14 @@
 module.exports = {
   presets: [
-    "@babel/preset-react",
+    require.resolve("@babel/preset-react"),
     [
-      "@babel/preset-env",
+      require.resolve("@babel/preset-env"),
       {
         targets: "> 0.25%, not dead"
       }
     ]
   ],
   plugins: [
-    "@babel/plugin-proposal-object-rest-spread"
+    require.resolve("@babel/plugin-proposal-object-rest-spread")
   ]
 }
