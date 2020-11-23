@@ -1,6 +1,6 @@
 {
   "name": "@drewfle/bundler",
-  "version": "1.4.9",
+  "version": "1.4.10",
   "description": "",
   "author": "Andrew Liu <andrewliustudio@gmail.com>",
   "bin": {
@@ -22,7 +22,7 @@
     "@babel/plugin-proposal-object-rest-spread": "7.12.1",
     "@babel/preset-env": "7.12.1",
     "@babel/preset-react": "7.12.1",
-    "@drewfle/config": "^0.1.7",
+    "@drewfle/config": "^0.2.0",
     "@drewfle/templates": "^1.0.5",
     "@rollup/plugin-babel": "5.2.1",
     "@rollup/plugin-commonjs": "15.1.0",
