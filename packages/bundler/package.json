@@ -1,6 +1,6 @@
 {
   "name": "@drewfle/bundler",
-  "version": "1.4.12",
+  "version": "1.4.13",
   "description": "",
   "author": "Andrew Liu <andrewliustudio@gmail.com>",
   "bin": {
