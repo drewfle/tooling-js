@@ -2,9 +2,9 @@
 
 ![](https://github.com/drewfle/tooling-js/blob/master/packages/bundler/files/bundler-watch.gif)
 
-Drewfle Bundler is a building and bundling tool for Typescript. It leverages Rollup API and abstracts away common dependencies. It offers out of box Typescript support for building libraries. It also supports bundling front end web apps with PostCSS and additional Babel options.
+Drewfle Bundler is a building and bundling tool for Typescript React and Node.js project. It leverages Rollup API and abstracts away common dependencies. It offers out of box Typescript support for building libraries. It also supports bundling front end web apps with PostCSS and additional Babel options. Under the hood Drewfle Bundler uses [rollup-plugin-typescript2](https://www.npmjs.com/package/rollup-plugin-typescript2) by default. When the `--compiler` option is set to `esbuild`, it uses [esbuild](https://github.com/evanw/esbuild) and disables Babel regardless of other options.
 
-Under the hood Drewfle Bundler uses [rollup-plugin-typescript2](https://www.npmjs.com/package/rollup-plugin-typescript2) by default. When the `--compiler` option is set to `esbuild`, it uses [esbuild](https://github.com/evanw/esbuild) and disables Babel regardless of other options.
+[@drewfle/bundler](https://www.npmjs.com/package/@drewfle/bundler) is also available on NPM.
 
 ## Options
 
